@@ -3,9 +3,11 @@ from typing import Generator, Union
 
 from PIL import Image
 
-	# 1. Lớp ImageStreamer được khai báo với phương thức khởi tạo __init__ nhận tham số image_or_folder (có thể là đường dẫn dạng chuỗi hoặc đối tượng Path).
+	# 1. Lớp ImageStreamer được khai báo với phương thức khởi tạo __init__ nhận tham số image_or_folder 
+    # (có thể là đường dẫn dạng chuỗi hoặc đối tượng Path).
 
-	# 2. Trong phương thức khởi tạo, đường dẫn được chuyển đổi thành đối tượng Path và một generator được tạo bằng phương thức _get_image_generator.
+	# 2. Trong phương thức khởi tạo, đường dẫn được chuyển đổi thành đối tượng Path và một generator
+    # được tạo bằng phương thức _get_image_generator.
 
 	# 3. Phương thức _get_image_generator xử lý hai trường hợp:
 

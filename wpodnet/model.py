@@ -2,6 +2,21 @@ import torch
 import torch.nn as nn
 
 
+	# * Tham số đầu vào:
+
+
+	# 	* in_channels: Số kênh đầu vào (độ sâu của tensor đầu vào)
+	# 	* out_channels: Số kênh đầu ra (số lượng bộ lọc tích chập)
+	# * Thành phần cấu tạo:
+
+
+	# 	a. self.conv_layer: Lớp tích chập 2D với kernel size 3x3 và padding 1
+	# 	b. self.bn_layer: Lớp chuẩn hóa batch với các tham số momentum và epsilon
+	# 	c. self.act_layer: Hàm kích hoạt ReLU
+
+
+
+
 class BasicConvBlock(nn.Module):
     def __init__(self, in_channels: int, out_channels: int):
         super(BasicConvBlock, self).__init__()
@@ -29,6 +44,9 @@ class ResBlock(nn.Module):
         h = self.bn_layer(h)
         return self.act_layer(x + h)
 
+# self.backbone là thành phần chính của mạng, được xây dựng bằng cách sử dụng nn.Sequential, 
+# cho phép nhiều lớp mạng nơ-ron được xếp chồng lên nhau theo thứ tự. Ảnh đầu vào sẽ đi qua backbone 
+# để trích xuất các đặc trưng.
 
 class WPODNet(nn.Module):
     def __init__(self):
@@ -57,6 +75,13 @@ class WPODNet(nn.Module):
         self.prob_layer = nn.Conv2d(128, 2, kernel_size=3, padding=1)
         self.bbox_layer = nn.Conv2d(128, 6, kernel_size=3, padding=1)
 
+
+        # Đoạn mã này tạo một tensor giả "dummy" chỉ để theo dõi thiết bị mà mô hình đang chạy trên đó (CPU hoặc GPU).
+        # Phương thức device là một property cho phép truy cập dễ dàng đến thông tin thiết bị mà không cần lưu trữ thiết bị một cách rõ ràng.
+
+        # Ví dụ thực tế: Giống như cách một ứng dụng điện thoại thông minh tự động xác định liệu nó đang chạy trên iPhone hay Android 
+        # để tối ưu hóa hiệu suất, tensor dummy giúp mô hình biết nó đang chạy trên CPU hay GPU để xử lý dữ liệu một cách phù hợp.
+        
         # Registry a dummy tensor for retrieve the attached device
         self.register_buffer('dummy', torch.Tensor(), persistent=False)
 
