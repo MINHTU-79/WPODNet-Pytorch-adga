@@ -142,6 +142,9 @@ class Prediction:
         warped = self.image.transform((width, height), Image.PERSPECTIVE, coeffs)
         return warped
 
+
+
+
     # Lớp Predictor có chức năng chính là phát hiện và định vị biển số xe trong hình ảnh. Cụ thể:
 
     #     1. Mục đích chính: Nhận diện vị trí biển số xe từ ảnh đầu vào và xác định chính xác tọa độ 4 góc của biển số.
@@ -344,7 +347,8 @@ class Predictor:
         return np.transpose(bounds)
 
     # 	Phân tích chi tiết hàm predict trong WPODNet-Pytorch
-    # Hàm predict này là một phương thức của class Predictor trong mô hình WPODNet dùng để phát hiện biển số xe trong ảnh. Tôi sẽ phân tích chi tiết từng dòng code:
+    # Hàm predict này là một phương thức của class Predictor trong mô hình WPODNet dùng để phát hiện biển số xe trong ảnh.
+    #  Tôi sẽ phân tích chi tiết từng dòng code:
 
     # 1. Khai báo hàm và tham số
     # def predict(self, image: Image.Image, scaling_ratio: float = 1.0, dim_min: int = 288, dim_max: int = 608) -> Prediction:
